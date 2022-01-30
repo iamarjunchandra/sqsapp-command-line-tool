@@ -2,7 +2,7 @@ from botocore.exceptions import ClientError
 import logging
 """
 fetch the attribute approximate number of messages in the queue
-for validating count of consume command is less thant he messages in queue
+for validating the argument count of consume command to be less than the messages in queue
 """
 logger = logging.getLogger(__name__)
 
