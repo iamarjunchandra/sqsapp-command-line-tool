@@ -4,6 +4,7 @@ services:
 
   interview-localstack:
     image: localstack/localstack
+    container_name: localstack_aws
     ports:
       - "4567-4597:4567-4597"
       - "4566:4566"
@@ -15,8 +16,22 @@ services:
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      app_network:
+        ipv4_address: 172.20.0.2
       
   database-setup:
     image: amazon/dynamodb-local
+    container_name: awslocaldb
     ports:
       - "8000:8000"
+    networks:
+      app_network:
+        ipv4_address: 172.20.0.3
+networks:
+  app_network:
+    name: sqsapp-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24

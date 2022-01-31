@@ -1,5 +1,5 @@
 import typer
-from sqsapp import read_messages, create_db, crud_db
+from . import read_messages, create_db, crud_db
 app=typer.Typer()
 
 @app.command()

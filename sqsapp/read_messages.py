@@ -1,6 +1,6 @@
 import boto3
 from botocore.exceptions import ClientError
-from config import endpoint_url
+from . import config
 from . import count_message
 import logging
 import typer
@@ -13,7 +13,10 @@ Reads the message from SQS queue and stroes in dynamodb-local table called 'sqsa
 
 def read_message(n,url):
     client=boto3.client('sqs',
-                      endpoint_url=endpoint_url)
+                      endpoint_url=config.endpoint_url,
+                      aws_access_key_id=config.aws_access_key_id,
+                      aws_secret_access_key=config.aws_secret_access_key,
+                      region_name=config.region_name)
     query_len=int(count_message.count_messages(client,url))
     if query_len>=n:
         query_data=[]

@@ -1,2 +1,4 @@
 boto3==1.20.44
 typer==0.4.0
+docker==20.10.12
+docker-compose==1.29.2
